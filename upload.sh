@@ -86,7 +86,7 @@ DEFINITION_PATH() {
 }
 
 LOAD_RCLONE_ENV() {
-    RCLONE_ENV_FILE="${ARIA2_CONF_DIR}/rclone.env"
+    RCLONE_ENV_FILE="$(dirname $0)/rclone.env"
     [[ -f ${RCLONE_ENV_FILE} ]] && export $(grep -Ev "^#|^$" ${RCLONE_ENV_FILE} | xargs -0)
 }
 

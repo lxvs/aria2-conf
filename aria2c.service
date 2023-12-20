@@ -1,0 +1,11 @@
+[Unit]
+Description=aria2c
+After=network.target
+
+[Service]
+User=aria2
+ExecStart=aria2c
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

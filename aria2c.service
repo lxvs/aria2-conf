@@ -1,9 +1,11 @@
 [Unit]
 Description=aria2c
-After=network.target
+Requires=network-online.target
+After=network-online.target
 
 [Service]
 User=aria2
+ExecStartPre=/bin/sh -c 'until ping -c1 google.com; do sleep 1; done;'
 ExecStart=aria2c
 Restart=on-failure
 

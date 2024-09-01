@@ -95,31 +95,17 @@ UPLOAD_FILE() {
     UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload start: ${LOCAL_PATH} -> ${REMOTE_PATH}"
     OUTPUT_UPLOAD_LOG
     TASK_INFO
-    RETRY=0
-    RETRY_NUM=3
-    while [ ${RETRY} -le ${RETRY_NUM} ]; do
-        [ ${RETRY} != 0 ] && (
-            echo
-            echo -e "$(DATE_TIME) ${ERROR} Upload failed! Retry ${RETRY}/${RETRY_NUM} ..."
-            echo
-        )
-        rclone move -v "${LOCAL_PATH}" "${REMOTE_PATH}"
-        RCLONE_EXIT_CODE=$?
-        if [ ${RCLONE_EXIT_CODE} -eq 0 ]; then
-            UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload done: ${LOCAL_PATH} -> ${REMOTE_PATH}"
-            OUTPUT_UPLOAD_LOG
-            DELETE_EMPTY_DIR
-            break
-        else
-            RETRY=$((${RETRY} + 1))
-            [ ${RETRY} -gt ${RETRY_NUM} ] && (
-                echo
-                UPLOAD_LOG="$(DATE_TIME) ${ERROR} Upload failed: ${LOCAL_PATH}"
-                OUTPUT_UPLOAD_LOG
-            )
-            sleep 3
-        fi
-    done
+    rclone move -v "${LOCAL_PATH}" "${REMOTE_PATH}"
+    RCLONE_EXIT_CODE=$?
+    if [ ${RCLONE_EXIT_CODE} -eq 0 ]; then
+        UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload done: ${LOCAL_PATH} -> ${REMOTE_PATH}"
+        OUTPUT_UPLOAD_LOG
+        DELETE_EMPTY_DIR
+        break
+    else
+        UPLOAD_LOG="$(DATE_TIME) ${ERROR} Upload failed: ${LOCAL_PATH}"
+        OUTPUT_UPLOAD_LOG
+    fi
 }
 
 CHECK_CORE_FILE "$@"

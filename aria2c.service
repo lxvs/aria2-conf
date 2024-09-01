@@ -5,7 +5,7 @@ After=network-online.target
 
 [Service]
 User=aria2
-ExecStartPre=/bin/sh -c 'until ping -c1 google.com; do sleep 1; done;'
+ExecStartPre=/bin/sh -c 'until ping -c1 google.com && mountpoint /home/aria2/Download; do sleep 1; done;'
 ExecStart=aria2c
 Restart=on-failure
 

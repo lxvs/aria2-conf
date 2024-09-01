@@ -92,7 +92,7 @@ LOAD_RCLONE_ENV() {
 
 UPLOAD_FILE() {
     echo -e "$(DATE_TIME) ${INFO} Start upload files..."
-    UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload start: ${LOCAL_PATH} -> ${REMOTE_PATH}"
+    UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload started: ${LOCAL_PATH} -> ${REMOTE_PATH}"
     OUTPUT_UPLOAD_LOG
     TASK_INFO
     rclone move -v "${LOCAL_PATH}" "${REMOTE_PATH}"

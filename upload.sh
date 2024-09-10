@@ -101,7 +101,6 @@ UPLOAD_FILE() {
         UPLOAD_LOG="$(DATE_TIME) ${INFO} Upload done: ${LOCAL_PATH} -> ${REMOTE_PATH}"
         OUTPUT_UPLOAD_LOG
         DELETE_EMPTY_DIR
-        break
     else
         UPLOAD_LOG="$(DATE_TIME) ${ERROR} Upload failed: ${LOCAL_PATH}"
         OUTPUT_UPLOAD_LOG
